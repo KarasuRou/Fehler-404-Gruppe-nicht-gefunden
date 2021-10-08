@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Fehler-404-Gruppe-nicht-gefunden:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Fehler_404_Gruppe_nicht_gefunden_jar</output-path>
+    <root id="archive" name="Fehler-404-Gruppe-nicht-gefunden.jar">
+      <element id="module-output" name="Fehler-404-Gruppe-nicht-gefunden" />
+    </root>
+  </artifact>
+</component>

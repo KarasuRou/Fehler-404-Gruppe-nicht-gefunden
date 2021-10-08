@@ -4,31 +4,46 @@ import java.util.Scanner;
 
 public class Launcher {
 
-    final static double mws = 0.18; // percent
+    private final static double mws = 0.18;
+    private final static double[] products = new double[5];
 
     public static void main(String[] args){
-        double firstProduct, secondProduct, thirdProduct, fourthProduct, fifthProduct, sumOfProduct, mwsAmount;
+        double sumOfProduct, mwsAmount;
 
-        System.out.println("Bitte geben sie 5 Werte im Folgenden Format ein (5,5):");
+        System.out.println("Bitte geben Sie 5 Werte im Folgenden Format ein (5,5):");
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("1 Produkt > ");
-        firstProduct = scanner.nextDouble();
-        System.out.print("2 Produkt > ");
-        secondProduct = scanner.nextDouble();
-        System.out.print("3 Produkt > ");
-        thirdProduct = scanner.nextDouble();
-        System.out.print("4 Produkt > ");
-        fourthProduct = scanner.nextDouble();
-        System.out.print("5 Produkt > ");
-        fifthProduct = scanner.nextDouble();
+        getProducts(scanner);
+        scanner.close();
 
-        sumOfProduct = firstProduct + secondProduct + thirdProduct + fourthProduct + fifthProduct;
-        mwsAmount = sumOfProduct * mws;
+        sumOfProduct = calculateSum();
+        mwsAmount = calculateMWS(sumOfProduct);
 
-        System.out.println("\r\n\r\nSumme aller Produkte: " + sumOfProduct + "€\r\n" +
-                "Anteil Mehrwertsteuer: " + mwsAmount + "€\r\n" +
-                "Anzahl der Produkte: 5");
+        outputSumAndMWS(sumOfProduct, mwsAmount);
+    }
 
+    private static void getProducts(Scanner scanner) {
+        for (int i = 0; i < products.length; i++) {
+            System.out.print((i + 1) + " Produkt > ");
+            products[i] = scanner.nextDouble();
+        }
+    }
+
+    private static double calculateSum() {
+        double result = 0;
+        for (double product : products) {
+            result += product;
+        }
+        return result;
+    }
+
+    private static double calculateMWS(double sumOfProduct) {
+        return (sumOfProduct * mws);
+    }
+
+    private static void outputSumAndMWS(double sumOfProduct, double mwsAmount) {
+        System.out.printf("\r\n\r\nSumme: %.2f EUR\r\n" +
+                "Anteil Mehrwertsteuer: %.2f EUR\r\n" +
+                "Anzahl der Produkte: 5", sumOfProduct, mwsAmount);
     }
 }
