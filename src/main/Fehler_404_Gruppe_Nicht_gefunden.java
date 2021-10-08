@@ -2,7 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-public class Launcher {
+public class Fehler_404_Gruppe_Nicht_gefunden {
 
     private final static double mws = 0.18;
     private final static double[] products = new double[5];
