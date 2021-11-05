@@ -4,48 +4,76 @@ import java.util.Scanner;
 
 public class Fehler_404_Gruppe_Nicht_gefunden {
 
-    public static void main(String[] args){
-        double sumOfProduct, mwsAmount, mws = 0.19;
+    private static final double CONSUMER_VAT = 0.19, BASIC_VAT = 0.07;
+    private static int products = 1;
+    private static double basicVatPrice = 0, consumerVatPrice = 0;
 
-        System.out.println("Bitte geben Sie 5 Werte im Folgenden Format ein (5,5):");
+    public static void main(String[] args){
+        double productSum;
+
         Scanner scanner = new Scanner(System.in);
 
-        sumOfProduct = getProductPrice(
-                scanner
-        );
+        // 1
+        productSum = getProductPrice(scanner);
+        // 2
+        productSum += getProductPrice(scanner);
+        // 3
+        productSum += getProductPrice(scanner);
+        // 4
+        productSum += getProductPrice(scanner);
+        // 5
+        productSum += getProductPrice(scanner);
         scanner.close();
 
-
-        mwsAmount = calculateMWS(sumOfProduct, mws);
-
-        outputSumAndMWS(sumOfProduct, mwsAmount);
+        outputSumAndMWS(productSum);
     }
-
     private static double getProductPrice(Scanner scanner) {
-        System.out.print("1 Produkt > ");
-        double firstProduct = scanner.nextDouble();
-        System.out.print("2 Produkt > ");
-        double secondProduct = scanner.nextDouble();
-        System.out.print("3 Produkt > ");
-        double thirdProduct = scanner.nextDouble();
-        System.out.print("4 Produkt > ");
-        double fourthProduct = scanner.nextDouble();
-        System.out.print("5 Produkt > ");
-        double fifthProduct = scanner.nextDouble();
-        return calculateSum(firstProduct, secondProduct, thirdProduct, fourthProduct, fifthProduct);
+        double temporarilyProduct;
+        if (productIsBasicProduct(scanner)) {
+            temporarilyProduct = getBasicProduct(scanner);
+            basicVatPrice += getBasicVat(temporarilyProduct);
+        } else {
+            temporarilyProduct = getConsumerProduct(scanner);
+            consumerVatPrice += getConsumerVat(temporarilyProduct);
+            System.out.println(consumerVatPrice);
+        }
+        System.out.println();
+        return temporarilyProduct;
     }
 
-    private static double calculateSum(double firstProduct, double secondProduct, double thirdProduct, double fourthProduct, double fifthProduct) {
-        return firstProduct + secondProduct + thirdProduct + fourthProduct + fifthProduct;
+    private static double getConsumerVat(double product) {
+        return product * CONSUMER_VAT;
     }
 
-    private static double calculateMWS(double sumOfProduct, double mws) {
-        return (sumOfProduct * mws);
+    private static double getBasicVat(double product) {
+        return product * BASIC_VAT;
     }
 
-    private static void outputSumAndMWS(double sumOfProduct, double mwsAmount) {
+    private static double getConsumerProduct(Scanner scanner) {
+        System.out.println("Bitte geben Sie den Werte des Konsumgüterprodukts im folgenden Format ein (5,5 oder 4):");
+        System.out.printf("%d Produkt > ", products++);
+        return scanner.nextDouble();
+    }
+
+    private static double getBasicProduct(Scanner scanner) {
+        System.out.println("Bitte geben Sie den Werte des Grundbedarfsprodukts im folgenden Format ein (5,5 oder 4):");
+        System.out.printf("%d Produkt > ", products++);
+        return scanner.nextDouble();
+    }
+
+    private static boolean productIsBasicProduct(Scanner scanner) {
+        System.out.printf("Ist das %d Produkt ein:\r\n1: Grundbedarfsprodukt\r\n2: Konsumgüterprodukt\r\n> ", products);
+        String choice = scanner.next();
+        System.out.println(choice);
+        return choice.contains("1") ||
+                (choice.contains("Grund") || choice.contains("grund")) ||
+                choice.contains("bedarf");
+    }
+
+    private static void outputSumAndMWS(double sumOfProduct) {
         System.out.printf("\r\n\r\nSumme: %.2f EUR\r\n" +
-                "Anteil Mehrwertsteuer: %.2f EUR\r\n" +
-                "Anzahl der Produkte: 5", sumOfProduct, mwsAmount);
+                "Anteil Mehrwertsteuer (Grundbedarf %d%%): %.2f EUR\r\n" +
+                "Anteil Mehrwertsteuer (Konsumgüter %d%%): %.2f EUR\r\n" +
+                "Anzahl der Produkte: 5", sumOfProduct, ((int) BASIC_VAT * 100), basicVatPrice, ((int) CONSUMER_VAT * 100), consumerVatPrice);
     }
 }
