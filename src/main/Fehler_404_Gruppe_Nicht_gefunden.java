@@ -10,8 +10,8 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
 
     public static void main(String[] args){
         double productSum = 0;
-
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Wie viele Produkte werden angegeben?\r\n> ");
         int productCount = scanner.nextInt();
         System.out.println("\r\n");
