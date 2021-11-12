@@ -15,6 +15,7 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
         System.out.print("Wie viele Produkte werden angegeben?\r\n> ");
         int productCount = scanner.nextInt();
         System.out.println("\r\n");
+
         for (int i = 0; i < productCount; i++) {
             productSum += getProductPrice(scanner);
         }
@@ -31,7 +32,6 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
         } else {
             temporarilyProduct = getConsumerProduct(scanner);
             consumerVatPrice += getConsumerVat(temporarilyProduct);
-            System.out.println(consumerVatPrice);
         }
         System.out.println();
         return temporarilyProduct;
