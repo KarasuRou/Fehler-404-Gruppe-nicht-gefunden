@@ -28,11 +28,11 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
     private static double getProductPrice(Scanner scanner) throws Exception {
         double temporarilyProduct;
         if (productIsBasicProduct(scanner)) {
-            System.out.println("Bitte geben Sie den Werte des Grundbedarfsprodukts im folgenden Format ein (5,5 oder 4):");
+            System.out.println("Bitte geben Sie den Werte des Grundbedarfsprodukts im folgenden Format ein (5.5 oder 4):");
             temporarilyProduct = getProduct(scanner);
             basicVatPrice += getBasicVat(temporarilyProduct);
         } else {
-            System.out.println("Bitte geben Sie den Werte des Konsumgüterprodukts im folgenden Format ein (5,5 oder 4):");
+            System.out.println("Bitte geben Sie den Werte des Konsumgüterprodukts im folgenden Format ein (5.5 oder 4):");
             temporarilyProduct = getProduct(scanner);
             consumerVatPrice += getConsumerVat(temporarilyProduct);
         }
