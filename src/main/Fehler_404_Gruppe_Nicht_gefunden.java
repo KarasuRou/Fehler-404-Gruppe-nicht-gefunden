@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Fehler_404_Gruppe_Nicht_gefunden {
 
@@ -11,26 +12,28 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
     public static void main(String[] args){
         double productSum = 0;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Das Programm mit einem ENTER beenden.\r\n");
 
-        System.out.print("Wie viele Produkte werden angegeben?\r\n> ");
-        int productCount = scanner.nextInt();
-        System.out.println("\r\n");
-
-        for (int i = 0; i < productCount; i++) {
-            productSum += getProductPrice(scanner);
-        }
+        try {
+            do {
+                productSum += getProductPrice(scanner);
+            } while (true);
+        } catch (Exception ignored) {}
+        finally {products--;}
 
         scanner.close();
 
         outputSumAndMWS(productSum);
     }
-    private static double getProductPrice(Scanner scanner) {
+    private static double getProductPrice(Scanner scanner) throws Exception {
         double temporarilyProduct;
         if (productIsBasicProduct(scanner)) {
-            temporarilyProduct = getBasicProduct(scanner);
+            System.out.println("Bitte geben Sie den Werte des Grundbedarfsprodukts im folgenden Format ein (5,5 oder 4):");
+            temporarilyProduct = getProduct(scanner);
             basicVatPrice += getBasicVat(temporarilyProduct);
         } else {
-            temporarilyProduct = getConsumerProduct(scanner);
+            System.out.println("Bitte geben Sie den Werte des Konsumgüterprodukts im folgenden Format ein (5,5 oder 4):");
+            temporarilyProduct = getProduct(scanner);
             consumerVatPrice += getConsumerVat(temporarilyProduct);
         }
         System.out.println();
@@ -45,22 +48,28 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
         return product * BASIC_VAT;
     }
 
-    private static double getConsumerProduct(Scanner scanner) {
-        System.out.println("Bitte geben Sie den Werte des Konsumgüterprodukts im folgenden Format ein (5,5 oder 4):");
+    private static double getProduct(Scanner scanner) throws Exception {
         System.out.printf("%d Produkt > ", products);
-        return scanner.nextDouble();
+        String product;
+        if (!(product = scanner.nextLine()).equals("")) {
+            if (Pattern.matches("[a-zA-Z]", product)) {
+                System.err.println("Die Eingabe war fehlerhaft!!\r\n");
+                products--;
+                return 0;
+            } else {
+                return Double.parseDouble(product);
+            }
+        } else {
+            throw new Exception("ENDE");
+        }
     }
 
-    private static double getBasicProduct(Scanner scanner) {
-        System.out.println("Bitte geben Sie den Werte des Grundbedarfsprodukts im folgenden Format ein (5,5 oder 4):");
-        System.out.printf("%d Produkt > ", products);
-        return scanner.nextDouble();
-    }
-
-    private static boolean productIsBasicProduct(Scanner scanner) {
+    private static boolean productIsBasicProduct(Scanner scanner) throws Exception {
         System.out.printf("Ist das %d Produkt ein:\r\n1: Grundbedarfsprodukt\r\n2: Konsumgüterprodukt\r\n> ", ++products);
-        String choice = scanner.next();
-        System.out.println(choice);
+        String choice = scanner.nextLine();
+        if (choice.equals("")) {
+            throw new Exception("ENDE");
+        }
         return choice.contains("1") ||
                 (choice.contains("Grund") || choice.contains("grund")) ||
                 choice.contains("bedarf");
