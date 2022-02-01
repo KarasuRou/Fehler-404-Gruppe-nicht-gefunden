@@ -24,8 +24,8 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
     private static void chooseProgramComplexityAndStartProgram(){
         int complexProgram = getComplexProgram();
         int hand = getHand();
-        Output.write("Complex-choose: " + (complexProgram + 1), OUTPUT_NAME);
-        Output.write("Hand-choose:    " + (hand + 1), OUTPUT_NAME);
+//        Output.write("Complex-choose: " + (complexProgram + 1), OUTPUT_NAME);
+//        Output.write("Hand-choose:    " + (hand + 1), OUTPUT_NAME);
         int randomNumber = new Random().nextInt(5); // 5 Hand possibilities
         if (hand >= 0 && hand <= 4) {
             switch (complexProgram) {
