@@ -2,7 +2,9 @@ package main.medium;
 
 public class MediumProgram {
 
-    public MediumProgram(){
+    private MediumProgram(){}
+
+    public static void start(int hand, int randomNumber){
 
     }
 }
