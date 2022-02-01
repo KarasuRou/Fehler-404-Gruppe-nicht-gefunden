@@ -1,5 +1,7 @@
 package main;
 
+import Material_211210.Bildbearbeitung;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -10,6 +12,14 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
     private static double basicVatPrice = 0, consumerVatPrice = 0;
 
     public static void main(String[] args){
+//       startKassenProgramm();
+        Bildbearbeitung bildbearbeitung = new Bildbearbeitung();
+        bildbearbeitung.kopiere();
+        System.exit(0);
+
+    }
+
+    private static void startKassenProgramm() {
         double productSum = 0;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Das Programm mit einem ENTER beenden.\r\n");
@@ -25,6 +35,7 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
 
         outputSumAndMWS(productSum);
     }
+
     private static double getProductPrice(Scanner scanner) throws Exception {
         double temporarilyProduct;
         if (productIsBasicProduct(scanner)) {
