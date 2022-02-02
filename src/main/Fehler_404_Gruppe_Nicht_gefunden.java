@@ -6,6 +6,7 @@ import main.medium.MediumProgram;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Diese Klasse bietet viele Methoden an um
@@ -81,6 +82,10 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
                     Output.errorWrite("You're input: \"" + input + "\" is not valid!", OUTPUT_NAME);
                 }
             }
+            try {
+                // Output class has an issue with .errorWrite used before .write -> Solution: wait 100ms...
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException ignored) {}
         } while (chosen == -1);
         return chosen;
     }
@@ -119,6 +124,10 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
                     Output.errorWrite("You're input: \"" + input + "\" is not valid!", OUTPUT_NAME);
                 }
             }
+            try {
+                // Output class has an issue with .errorWrite used before .write -> Solution: wait 100ms...
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException ignored) {}
         } while (chosen == -1);
         return chosen;
     }
