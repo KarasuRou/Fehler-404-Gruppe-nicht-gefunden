@@ -7,6 +7,11 @@ import main.medium.MediumProgram;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Diese Klasse bietet viele Methoden an um
+ * @author Rouven Tjalf Rosploch
+ * @version 1.00, 02.02.2022
+ */
 public class Fehler_404_Gruppe_Nicht_gefunden {
 
     private final static String OUTPUT_NAME = "Launcher";
@@ -24,8 +29,6 @@ public class Fehler_404_Gruppe_Nicht_gefunden {
     private static void chooseProgramComplexityAndStartProgram(){
         int complexProgram = getComplexProgram();
         int hand = getHand();
-//        Output.write("Complex-choose: " + (complexProgram + 1), OUTPUT_NAME);
-//        Output.write("Hand-choose:    " + (hand + 1), OUTPUT_NAME);
         int randomNumber = new Random().nextInt(5); // 5 Hand possibilities
         if (hand >= 0 && hand <= 4) {
             switch (complexProgram) {

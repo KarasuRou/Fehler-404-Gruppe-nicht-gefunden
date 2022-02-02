@@ -2,11 +2,21 @@ package main.medium;
 
 import main.Output;
 
+/**
+ * Diese Klasse ist nur zum Starten der "mittelschweren" Variante, für SSP-ES (Stein-Papier-Schere-Echse-Spock).
+ * @author Rouven Tjalf Rosploch
+ * @version 1.00, 02.02.2022
+ */
 public class MediumProgram {
 
     private MediumProgram(){}
 
-    public static void start(int hand, int randomNumber){
+    /**
+     * Startet die Klasse
+     * @param hand ID des Spielers von der Hand
+     * @param enemy ID des Gegners von der Hand
+     */
+    public static void start(int hand, int enemy){
         /*
          * 0: SCHERE
          * 1: STEIN
@@ -15,9 +25,9 @@ public class MediumProgram {
          * 4: SPOCK
          */
         String ownHand = getHand(hand);
-        String enemyHand = getHand(randomNumber);
+        String enemyHand = getHand(enemy);
         String answer;
-        if (isWinner(hand, randomNumber)) {
+        if (isWinner(hand, enemy)) {
             answer = ownHand + " gewinnt gegen " + enemyHand + "! (xyz!)";
             answer = answer.replace("xyz", replaceSentence(ownHand, enemyHand));
         } else if (ownHand.equals(enemyHand)){
@@ -29,6 +39,12 @@ public class MediumProgram {
         Output.write(answer);
     }
 
+    /**
+     * Überprüft, ob der Spieler der Gewinner ist
+     * @param own ID der eigenen Hand
+     * @param enemy ID der Gegner Hand
+     * @return boolean – Gewonnen (true) oder nicht (false)
+     */
     private static boolean isWinner(int own, int enemy) {
         /*
          * 0: SCHERE
@@ -52,6 +68,16 @@ public class MediumProgram {
         return false;
     }
 
+    /**
+     * 0: SCHERE<br/>
+     * 1: STEIN<br/>
+     * 2: PAPIER<br/>
+     * 3: ECHSE<br/>
+     * 4: SPOCK<br/><br/>
+     * <b>Gibt {@code null} zurück, wenn {@code id} über 4 oder unter 0!</b>
+     * @param id Die Hand-ID – Beschreibung oben
+     * @return {@linkplain String} – Name der Hand
+     */
     private static String getHand(int id) {
         /*
          * 0: SCHERE

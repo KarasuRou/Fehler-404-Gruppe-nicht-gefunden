@@ -8,6 +8,8 @@ import java.util.Calendar;
  * <p>The Output class will output the given text into the console and writes it to a log file.</p>
  * <p>Can be used to replace {@code System.out.println()} and {@code Exception.printStackTrace()}.</p>
  * <p>Just use on of these methods: {@linkplain #write} / {@linkplain #errorWrite} / {@linkplain #exceptionWrite} .</p>
+ * @version 0.90, 21.07.2021
+ * @author Rouven Tjalf Rosploch
  */
 public class Output {
 

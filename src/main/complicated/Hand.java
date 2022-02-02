@@ -1,7 +1,9 @@
 package main.complicated;
 
 /**
- * Contains all possibility for: "Schere, Stein, Papier, Echse, Spock" - in German
+ * Bietet alle Möglichkeiten für: "Stein-Papier-Schere-Echse-Spock", als {@code enum}.
+ * @author Rouven Tjalf Rosploch
+ * @version 1.00, 02.02.2022
  */
 public enum Hand {
     SCHERE,
@@ -10,6 +12,10 @@ public enum Hand {
     ECHSE,
     SPOCK;
 
+    /**
+     * Erhält den Namen des enums
+     * @return {@linkplain Hand} – ASD
+     */
     public String getString(){
         switch (this) {
             case SCHERE:
@@ -26,10 +32,16 @@ public enum Hand {
         return this.toString();
     }
 
+    /**
+     * @see #isWinner(Hand, Hand)
+     */
     public boolean isWinner(int enemyHand){
         return isWinner(this, enemyHand);
     }
 
+    /**
+     * @see #getSentence(Hand, int)
+     */
     public String getSentence(int enemyHand) {
         return getSentence(this, enemyHand);
     }
@@ -40,29 +52,38 @@ public enum Hand {
      * 2: PAPIER<br/>
      * 3: ECHSE<br/>
      * 4: SPOCK<br/><br/>
-     * <b>Returns null if <i>id</i> is over 4 or under 0!</b>
-     * @return {@linkplain Hand}-enum
+     * <b>Gibt {@code null} zurück, wenn {@code id} über 4 oder unter 0!</b>
+     * @param id Die Hand-ID – Beschreibung oben
+     * @return {@linkplain Hand} – enum
      */
     public static Hand getHandByInt(int id){
         switch (id) {
             case 0:
-                return Hand.SCHERE;
+                return SCHERE;
             case 1:
-                return Hand.STEIN;
+                return STEIN;
             case 2:
-                return Hand.PAPIER;
+                return PAPIER;
             case 3:
-                return Hand.ECHSE;
+                return ECHSE;
             case 4:
-                return Hand.SPOCK;
+                return SPOCK;
         }
         return null;
     }
 
+    /**
+     * @see #isWinner(Hand, Hand)
+     */
     public static boolean isWinner(Hand thisHand, int enemyHand){
         return isWinner(thisHand, getHandByInt(enemyHand));
     }
 
+    /**
+     * Überprüft, ob das enum-Hand-Objekt der Gewinner ist
+     * @param enemyHand ID der Gegner-Hand. Siehe für mehr infos bei: {@linkplain #getHandByInt(int)}
+     * @return boolean – Gewonnen (true) oder nicht (false)
+     */
     public static boolean isWinner(Hand thisHand, Hand enemyHand){
         switch (thisHand) {
             case SCHERE:
@@ -79,10 +100,18 @@ public enum Hand {
         return false;
     }
 
+    /**
+     * @see #getSentence(Hand, Hand)
+     */
     public static String getSentence(Hand playerHand, int enemyHand){
         return getSentence(playerHand, getHandByInt(enemyHand));
     }
 
+    /**
+     * Gibt einen Satz zurück, der widerspiegelt, ob das enum-Hand-Objekt gewonnen/verloren hat und wie es gewonnen/verloren hat
+     * @param enemyHand ID der Gegner-Hand. Siehe für mehr infos bei: {@linkplain #getHandByInt(int)}
+     * @return String - Gewonnen/verloren Satz mit Beschreibung
+     */
     public static String getSentence(Hand playerHand, Hand enemyHand){
         String sentence;
         String detailSentence;
@@ -100,6 +129,7 @@ public enum Hand {
         return detailSentence + sentence;
     }
 
+    // Teil des Satzes der in #getSentence(Hand, Hand) verwendet wird
     private static String sentence(Hand playerHand, Hand enemyHand) {
         String sent = playerHand.getString() + " ", errorMessage = "ERROR";
         switch (playerHand) {
