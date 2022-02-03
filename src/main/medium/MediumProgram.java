@@ -159,9 +159,6 @@ public class MediumProgram {
             default:
                 return "ERROR";
         }
-        if (!sent.equals("ERROR")) {
-            sent += "";
-        }
         return sent;
     }
 }

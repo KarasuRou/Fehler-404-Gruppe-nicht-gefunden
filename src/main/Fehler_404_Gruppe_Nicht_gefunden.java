@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Diese Klasse bietet viele Methoden an um
+ * Diese Klasse bietet die Möglichkeit das SSP-ES Programm zu starten
  * @author Rouven Tjalf Rosploch
  * @version 1.00, 02.02.2022
  */
